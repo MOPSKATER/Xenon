@@ -4,7 +4,13 @@ namespace NeonTrainer.Mods
 {
     internal class TimeController : Mod
     {
+        public static float currentScale = 1f;
         private const float scaleStep = 0.05f;
+
+        void Awake()
+        {
+            RM.time.SetTargetTimescale(currentScale);
+        }
 
         void Update()
         {

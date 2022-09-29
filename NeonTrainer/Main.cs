@@ -48,6 +48,7 @@ namespace NeonTrainer
         private void OnLevelLoadComplete()
         {
             RushStats = LevelRush.GetCurrentLevelRush();
+            TimeController.currentScale = 1f;
 
             if (SceneManager.GetActiveScene().name.Equals("Heaven_Environment"))
                 return;
