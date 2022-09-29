@@ -11,7 +11,7 @@ Contains following features:
 - Time controller (for slowmo and super speed)
 - Book of Lift range crosshair
 
-# Installation
+## Installation
 
 Install Melon Loader like described [here](https://github.com/LavaGang/MelonLoader#how-to-use-the-installer).
 
