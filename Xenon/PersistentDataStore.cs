@@ -1,6 +1,6 @@
-﻿using NeonTrainer.Mods;
+﻿using Xenon.Mods;
 
-namespace NeonTrainer
+namespace Xenon
 {
     internal class PersistentDataStore
     {

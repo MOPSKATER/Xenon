@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace NeonTrainer.Mods
+namespace Xenon.Mods
 {
     internal class Help : Mod
     {

@@ -1,8 +1,7 @@
 ﻿using System.Reflection;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-namespace NeonTrainer.Mods
+namespace Xenon.Mods
 {
     internal class CharakterInfo : Mod
     {

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeonTrainer", "NeonTrainer\NeonTrainer.csproj", "{CAFDD6DF-F37A-4DA6-8CD2-F83565FB2FAB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xenon", "Xenon\Xenon.csproj", "{CAFDD6DF-F37A-4DA6-8CD2-F83565FB2FAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

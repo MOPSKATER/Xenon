@@ -1,7 +1,7 @@
-﻿using NeonTrainer.Mods;
-using UnityEngine;
+﻿using UnityEngine;
+using Xenon.Mods;
 
-namespace NeonTrainer
+namespace Xenon
 {
     internal class ModManager : MonoBehaviour
     {

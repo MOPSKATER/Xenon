@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using UnityEngine;
 
-namespace NeonTrainer.Mods
+namespace Xenon.Mods
 {
     internal class UIZipline
     {

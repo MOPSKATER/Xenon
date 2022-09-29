@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace NeonTrainer.Mods
+namespace Xenon.Mods
 {
     internal abstract class Mod : MonoBehaviour
     {

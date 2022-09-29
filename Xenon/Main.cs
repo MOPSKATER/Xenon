@@ -1,11 +1,11 @@
 ﻿using HarmonyLib;
 using MelonLoader;
-using NeonTrainer.Mods;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Xenon.Mods;
 
-namespace NeonTrainer
+namespace Xenon
 {
     public class Main : MelonMod
     {
@@ -33,7 +33,7 @@ namespace NeonTrainer
             HarmonyLib.Harmony harmony = new("de.MOPSKATER.NeonTrainer");
 
             MethodInfo target = typeof(MechController).GetMethod("Update", BindingFlags.NonPublic | BindingFlags.Instance);
-            HarmonyMethod patch = new (typeof(UIZipline).GetMethod("PostUpdate"));
+            HarmonyMethod patch = new(typeof(UIZipline).GetMethod("PostUpdate"));
             harmony.Patch(target, null, patch);
 
             target = typeof(LevelRush).GetMethod("UseMiracle");
