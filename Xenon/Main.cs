@@ -43,12 +43,20 @@ namespace Xenon
             target = typeof(LevelRush).GetMethod("CanUseMiracle");
             patch = new HarmonyMethod(typeof(Katana).GetMethod("PreCanUseMiracle"));
             harmony.Patch(target, patch);
+
+            target = typeof(Exploder).GetMethod("BulletImpact");
+            patch = new HarmonyMethod(typeof(PhantomVisualiser).GetMethod("PreBulletImpact"));
+            harmony.Patch(target, patch);
+
+            target = typeof(ProjectileBase).GetMethod("UpdateTime");
+            patch = new HarmonyMethod(typeof(PhantomVisualiser).GetMethod("PostUpdateTime"));
+            harmony.Patch(target, null, patch);
         }
 
         private void OnLevelLoadComplete()
         {
             RushStats = LevelRush.GetCurrentLevelRush();
-            TimeController.currentScale = 1f;
+            TimeController.Reset();
 
             if (SceneManager.GetActiveScene().name.Equals("Heaven_Environment"))
                 return;
