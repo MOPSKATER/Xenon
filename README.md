@@ -10,6 +10,7 @@ Contains following features:
 - Teleport savestate system
 - Time controller (for slowmo and super speed)
 - Book of Lift range crosshair
+- Show Phantom Bullets
 
 ## Installation
 
