@@ -1,4 +1,5 @@
-﻿using UnityEngine.InputSystem;
+﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Xenon.Mods
 {
@@ -9,6 +10,7 @@ namespace Xenon.Mods
 
         void Awake()
         {
+            Debug.Log("Scale " + currentScale);
             RM.time.SetTargetTimescale(currentScale);
         }
 

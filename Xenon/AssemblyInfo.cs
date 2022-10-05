@@ -19,4 +19,4 @@ using System.Runtime.InteropServices;
 // bereitgestellt wird.
 
 [assembly: Guid("44f12098-c061-453d-a1b7-934d7c0dc08f")]
-[assembly: MelonInfo(typeof(Xenon.Main), "Xenon", "1.0.0", "MOPSKATER")]
+[assembly: MelonInfo(typeof(Xenon.Main), "Xenon", "1.1.0", "MOPSKATER")]

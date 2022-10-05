@@ -56,10 +56,12 @@ namespace Xenon
         private void OnLevelLoadComplete()
         {
             RushStats = LevelRush.GetCurrentLevelRush();
-            TimeController.Reset();
 
             if (SceneManager.GetActiveScene().name.Equals("Heaven_Environment"))
+            {
+                TimeController.Reset();
                 return;
+            }
 
             GameObject modObject = new("Mod Manager");
             modObject.AddComponent<ModManager>();
