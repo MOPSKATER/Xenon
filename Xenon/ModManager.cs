@@ -12,7 +12,6 @@ namespace Xenon
             typeof(TimeController),
             typeof(Sphere),
             typeof(Katana),
-            typeof(Help),
             typeof(BulletScaler)
         };
 
