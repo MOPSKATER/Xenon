@@ -2,6 +2,8 @@
 using System.Linq;
 using MelonLoader;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
+using UniverseLib.Input;
 
 namespace Xenon.Mods
 {
@@ -14,8 +16,10 @@ namespace Xenon.Mods
                 return;
             }
             __result._collisionRadiusDamageable = Settings.bulletSizeModifier.Value;
+            __result.gameObject.GetComponent<SphereCollider>().radius = Settings.bulletSizeModifier.Value;
             var smth = __result.gameObject.GetComponent<Transform>();
-            smth.localScale = new Vector3(Settings.bulletSizeModifier.Value, Settings.bulletSizeModifier.Value, Settings.bulletSizeModifier.Value);
+            var fudgedV = Settings.bulletSizeModifier.Value / 2;
+            smth.localScale = new Vector3(fudgedV, fudgedV, fudgedV);
         }
 
         private static readonly string[] excludePaths = new string[]
