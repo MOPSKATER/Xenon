@@ -5,8 +5,16 @@ namespace Xenon
 {
     internal class ModManager : MonoBehaviour
     {
-        private readonly Type[] mods = { typeof(CharakterInfo), typeof(Noclip), typeof(Teleport), typeof(TimeController),
-            typeof(Sphere), typeof(Katana), typeof(Help) };
+        private readonly Type[] mods =
+        {
+            typeof(Noclip),
+            typeof(Teleport),
+            typeof(TimeController),
+            typeof(Sphere),
+            typeof(Katana),
+            typeof(Help),
+            typeof(BulletScaler)
+        };
 
         void Awake()
         {

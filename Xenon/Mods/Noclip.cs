@@ -1,4 +1,4 @@
-﻿using UnityEngine.InputSystem;
+﻿using UniverseLib.Input;
 
 namespace Xenon.Mods
 {
@@ -7,7 +7,7 @@ namespace Xenon.Mods
         private bool _active;
         void Update()
         {
-            if (Keyboard.current.nKey.wasPressedThisFrame)
+            if (InputManager.GetKeyDown(Settings.noClip.Value))
             {
                 _active = !_active;
                 RM.drifter.SetNoclip(_active);

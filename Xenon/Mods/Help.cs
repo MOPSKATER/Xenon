@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.InputSystem;
+using UniverseLib.Input;
 
 namespace Xenon.Mods
 {
@@ -32,7 +32,7 @@ namespace Xenon.Mods
 
         void Update()
         {
-            if (Keyboard.current.hKey.wasPressedThisFrame)
+            if (false)
                 _show = !_show;
         }
 

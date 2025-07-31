@@ -1,4 +1,4 @@
-﻿using UnityEngine.InputSystem;
+﻿using UniverseLib.Input;
 
 namespace Xenon.Mods
 {
@@ -6,20 +6,16 @@ namespace Xenon.Mods
     {
         void Update()
         {
-            if (Keyboard.current.kKey.wasPressedThisFrame)
+            if (InputManager.GetKeyDown(Settings.miracle.Value))
                 GS.AddCard("KATANA_MIRACLE");
         }
 
-        public static bool PreUseMiracle()
-        {
-            if (!AntiCheat.Anticheat.IsAnticheatTriggered()) return true;
-            return false;
-        }
+        public static bool PreUseMiracle() => (!AntiCheat.Anticheat.IsAnticheatTriggered());
 
         public static bool PreCanUseMiracle(ref bool __result)
         {
             if (!AntiCheat.Anticheat.IsAnticheatTriggered()) return true;
-            __result = true;
+            __result = true;//TODO: what??
             return false;
         }
     }
