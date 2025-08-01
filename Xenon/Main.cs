@@ -18,7 +18,7 @@ namespace Xenon
             AntiCheat.Anticheat.TriggerAnticheat();
             PatchGame();
             Game game = Singleton<Game>.Instance;
-
+            Settings.Register();
             if (game == null)
                 return;
             Game = game;
