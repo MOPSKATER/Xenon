@@ -41,14 +41,18 @@ namespace Xenon.Mods
             else if (InputManager.GetKeyDown(Settings.speedDown.Value))
             {
                 float newTime = RM.time.GetCurrentTimeScale() - scaleStep;
-                if (newTime < 0.10f) return;
+                if (newTime <= 0.10f) return;
 
                 RM.time.SetTargetTimescale(newTime);
                 currentScale = newTime;
             }
         }
 
-        public static void Reset() => currentScale = 1f;
+        public static void Reset()
+        {
+            currentScale = 1f;
+            RM.time.SetTargetTimescale(currentScale);
+        }
 
         private void OnGUI()
         {
