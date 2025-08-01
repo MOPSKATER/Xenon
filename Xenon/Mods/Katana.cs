@@ -1,4 +1,4 @@
-﻿using UnityEngine.InputSystem;
+﻿using UniverseLib.Input;
 
 namespace Xenon.Mods
 {
@@ -6,7 +6,7 @@ namespace Xenon.Mods
     {
         void Update()
         {
-            if (Keyboard.current.kKey.wasPressedThisFrame)
+            if (InputManager.GetKeyDown(Settings.miracle.Value))
                 GS.AddCard("KATANA_MIRACLE");
         }
 

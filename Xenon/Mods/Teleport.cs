@@ -1,7 +1,7 @@
 ﻿using KinematicCharacterController;
 using System.Reflection;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UniverseLib.Input;
 
 namespace Xenon.Mods
 {
@@ -19,42 +19,18 @@ namespace Xenon.Mods
 
         void Update()
         {
-            if (Keyboard.current.numpad0Key.wasPressedThisFrame)
+            for (int i = 0; i < Settings.teleport.Count; i++)
             {
-                if (Keyboard.current.ctrlKey.isPressed)
-                    SavePos(0);
-                else
+                var key = Settings.teleport[i].Value;
+                if (InputManager.GetKeyDown(key))
                 {
-                    if (Keyboard.current.shiftKey.isPressed)
-                        LoadPos(0, false);
+                    if (InputManager.GetKey(Settings.saveModifier.Value))
+                        SavePos(i);
                     else
-                        LoadPos(0, true);
-                }
-            }
-
-            if (Keyboard.current.numpad1Key.wasPressedThisFrame)
-            {
-                if (Keyboard.current.ctrlKey.isPressed)
-                    SavePos(1);
-                else
-                {
-                    if (Keyboard.current.shiftKey.isPressed)
-                        LoadPos(1, false);
-                    else
-                        LoadPos(1, true);
-                }
-            }
-
-            if (Keyboard.current.numpad2Key.wasPressedThisFrame)
-            {
-                if (Keyboard.current.ctrlKey.isPressed)
-                    SavePos(2);
-                else
-                {
-                    if (Keyboard.current.shiftKey.isPressed)
-                        LoadPos(2, false);
-                    else
-                        LoadPos(2, true);
+                    {
+                        LoadPos(i, (!InputManager.GetKey(Settings.loadModifier.Value)));
+                    }
+                    break;
                 }
             }
         }

@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.InputSystem;
+using UniverseLib.Input;
 
 namespace Xenon.Mods
 {
@@ -16,7 +16,7 @@ namespace Xenon.Mods
 
         void Update()
         {
-            if (Keyboard.current.upArrowKey.wasPressedThisFrame)
+            if (InputManager.GetKeyDown(Settings.speedUp.Value))
             {
                 float newTime = RM.time.GetCurrentTimeScale() + scaleStep;
                 if (newTime > 2f) return;
@@ -24,7 +24,7 @@ namespace Xenon.Mods
                 RM.time.SetTargetTimescale(newTime);
                 currentScale = newTime;
             }
-            else if (Keyboard.current.downArrowKey.wasPressedThisFrame)
+            else if (InputManager.GetKeyDown(Settings.speedDown.Value))
             {
                 float newTime = RM.time.GetCurrentTimeScale() - scaleStep;
                 if (newTime <= 0.15f) return;
