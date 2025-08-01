@@ -10,11 +10,7 @@ namespace Xenon.Mods
                 GS.AddCard("KATANA_MIRACLE");
         }
 
-        public static bool PreUseMiracle()
-        {
-            if (!AntiCheat.Anticheat.IsAnticheatTriggered()) return true;
-            return false;
-        }
+        public static bool PreUseMiracle() => (!AntiCheat.Anticheat.IsAnticheatTriggered());
 
         public static bool PreCanUseMiracle(ref bool __result)
         {
