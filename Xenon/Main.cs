@@ -51,6 +51,17 @@ namespace Xenon
             target = typeof(ProjectileBase).GetMethod("UpdateTime");
             patch = new HarmonyMethod(typeof(PhantomVisualiser).GetMethod("PostUpdateTime"));
             harmony.Patch(target, null, patch);
+
+            target = typeof(ProjectileBase).GetMethod("CreateProjectile", new Type[]
+            {
+                typeof(string),
+                typeof(Vector3),
+                typeof(Vector3),
+                typeof(ProjectileWeapon)
+            });
+			patch = new HarmonyMethod(typeof(BulletScaler).GetMethod("PostCreateProjectile"));
+            harmony.Patch(target, null, patch);
+
         }
 
         private void OnLevelLoadComplete()

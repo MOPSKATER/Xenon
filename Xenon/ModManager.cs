@@ -11,7 +11,8 @@ namespace Xenon
             typeof(Teleport),
             typeof(TimeController),
             typeof(Sphere),
-            typeof(Katana)
+            typeof(Katana),
+            typeof(BulletScaler)
         };
 
         void Awake()
