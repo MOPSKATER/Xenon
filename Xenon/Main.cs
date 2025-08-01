@@ -13,7 +13,7 @@ namespace Xenon
 
         public static LevelRushStats RushStats { get; private set; }
 
-        public override void OnApplicationLateStart()
+        public override void OnLateInitializeMelon()
         {
             AntiCheat.Anticheat.TriggerAnticheat();
             PatchGame();
