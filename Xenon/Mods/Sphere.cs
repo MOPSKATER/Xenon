@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.InputSystem;
+using UniverseLib.Input;
 
 namespace Xenon.Mods
 {
@@ -10,7 +10,7 @@ namespace Xenon.Mods
 
         private void Update()
         {
-            if (Keyboard.current.cKey.wasPressedThisFrame)
+            if (InputManager.GetKeyDown(Settings.radiusClear.Value))
             {
                 foreach (GameObject sphere in _spheres)
                     Destroy(sphere);
@@ -18,7 +18,7 @@ namespace Xenon.Mods
                 return;
             }
 
-            if (!Keyboard.current.bKey.wasPressedThisFrame && !Keyboard.current.vKey.wasPressedThisFrame) return;
+            if (!InputManager.GetKeyDown(Settings.radiusBoof.Value) && !InputManager.GetKeyDown(Settings.radiusZipline.Value)) return;
 
 
             Vector3? target = GetZiplinePoint(RM.mechController);
@@ -27,8 +27,8 @@ namespace Xenon.Mods
             GameObject newSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             _spheres.Add(newSphere);
             newSphere.transform.position = target.Value;
-            newSphere.transform.localScale = Keyboard.current.bKey.wasPressedThisFrame ?
-                new(RADIUS_BOOK, RADIUS_BOOK, RADIUS_BOOK) : new(RADIUS_DOMINION, RADIUS_DOMINION, RADIUS_DOMINION);
+            var radius = InputManager.GetKeyDown(Settings.radiusBoof.Value) ? RADIUS_BOOK : RADIUS_DOMINION;
+            newSphere.transform.localScale = new(radius, radius, radius);
             newSphere.GetComponent<Collider>().enabled = false;
 
             Material material = newSphere.GetComponent<Renderer>().material;
