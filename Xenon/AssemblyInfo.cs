@@ -20,3 +20,5 @@ using System.Runtime.InteropServices;
 
 [assembly: Guid("44f12098-c061-453d-a1b7-934d7c0dc08f")]
 [assembly: MelonInfo(typeof(Xenon.Main), "Xenon", "1.2.0", "MOPSKATER, Slacking")]
+
+[assembly: MelonOptionalDependencies("NeonLite")]

@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using MelonLoader;
+using Semver;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,25 +10,82 @@ namespace Xenon
 {
     public class Main : MelonMod
     {
-        public static Game Game { get; private set; }
+        private bool oldAntiCheat = false;
+        public static Game Game
+        {
+            get; private set;
+        }
 
-        public static LevelRushStats RushStats { get; private set; }
+        public static LevelRushStats RushStats
+        {
+            get; private set;
+        }
 
-        public override void OnLateInitializeMelon()
+        private void TryFindingNeonLite()
+        {
+            NeonLite.Modules.Anticheat.Register(MelonAssembly);
+        }
+        private void TryFindingAntiCheat()
         {
             AntiCheat.Anticheat.TriggerAnticheat();
+            oldAntiCheat = true;
+        }
+        private readonly GUIStyle AntiCheatStyle = new()
+        {
+            fontSize = 20,
+            fontStyle = FontStyle.Bold
+        };
+        public override void OnLateInitializeMelon()
+        {
+            bool foundNeonLite = false;
+            foreach (var item in RegisteredMelons)
+            {
+                Debug.Log("[Xenon] " + item.Info.Name);
+                Debug.Log("[Xenon] " + item.Info.SemanticVersion);
+                if (item.Info.Name == "NeonLite" && item.Info.SemanticVersion > SemVersion.Parse("3.0.0"))
+                {
+                    Debug.Log("[Xenon] Found NeonLite AntiCheat.");
+                    try
+                    {
+                        TryFindingNeonLite();
+                    }
+                    catch { }
+                    foundNeonLite = true;
+                    break;
+                }
+            }
+            if (!foundNeonLite)
+            {
+                Debug.Log("[Xenon] Didn't find NeonLite AntiCheat.");
+                TryFindingAntiCheat();
+            }
             PatchGame();
             Game game = Singleton<Game>.Instance;
             Settings.Register();
             if (game == null)
+            {
                 return;
+            }
             Game = game;
             Game.OnLevelLoadComplete += OnLevelLoadComplete;
 
             if (RM.drifter)
+            {
                 OnLevelLoadComplete();
+            }
+            Debug.Log("[Xenon] Completed setup.");
         }
-
+        public override void OnGUI()
+        {
+            if (!(oldAntiCheat && RM.mechController.GetIsAlive()))
+            {
+                return;
+            }
+            AntiCheatStyle.normal.textColor = Color.white;
+            GUI.Label(new Rect(10, 10, 150, 30),
+                      "AntiCheat active",
+                      AntiCheatStyle);
+        }
         private void PatchGame()
         {
             HarmonyLib.Harmony harmony = new("de.MOPSKATER.NeonTrainer");
@@ -59,7 +117,7 @@ namespace Xenon
                 typeof(Vector3),
                 typeof(ProjectileWeapon)
             });
-			patch = new HarmonyMethod(typeof(BulletScaler).GetMethod("PostCreateProjectile"));
+            patch = new HarmonyMethod(typeof(BulletScaler).GetMethod("PostCreateProjectile"));
             harmony.Patch(target, null, patch);
 
         }
