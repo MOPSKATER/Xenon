@@ -46,6 +46,18 @@ namespace Xenon.Mods
                 RM.time.SetTargetTimescale(newTime);
                 currentScale = newTime;
             }
+            if (InputManager.GetKey(Settings.matrixKey1.Value))
+            {
+                RM.time.SetTargetTimescale(Settings.matrixSpeed1.Value);
+            }
+            else if (InputManager.GetKey(Settings.matrixKey2.Value))
+            {
+                RM.time.SetTargetTimescale(Settings.matrixSpeed2.Value);
+            }
+            else
+            {
+                RM.time.SetTargetTimescale(currentScale);//return to the set speed in case matrix mode was on last frame
+            }
         }
 
         public static void Reset()
@@ -56,7 +68,7 @@ namespace Xenon.Mods
 
         private void OnGUI()
         {
-            if(!(RM.mechController.GetIsAlive() && currentScale != 1f && Settings.speedShow.Value)) return;
+            if (!(RM.mechController.GetIsAlive() && currentScale != 1f && Settings.speedShow.Value)) return;
 
             GUI.Label(new Rect(Camera.main.pixelWidth - 600, 10, 100, 50), $"{currentScale:P0}", _style);
 
