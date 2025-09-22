@@ -1,4 +1,5 @@
 ﻿using MelonLoader;
+using MelonLoader.Preferences;
 using UnityEngine;
 
 namespace Xenon
@@ -20,6 +21,10 @@ namespace Xenon
         public static MelonPreferences_Entry<KeyCode> speedUp;
         public static MelonPreferences_Entry<KeyCode> speedDown;
         public static MelonPreferences_Entry<KeyCode> speedReset;
+        public static MelonPreferences_Entry<KeyCode> matrixKey1;
+        public static MelonPreferences_Entry<KeyCode> matrixKey2;
+        public static MelonPreferences_Entry<float> matrixSpeed1;
+        public static MelonPreferences_Entry<float> matrixSpeed2;
 
         public static List<MelonPreferences_Entry<KeyCode>> teleport = [];
 
@@ -48,6 +53,8 @@ namespace Xenon
             speedUp = keyBindings.CreateEntry("Speed up", KeyCode.UpArrow, description: "Increase the rate of time by 10%");
             speedDown = keyBindings.CreateEntry("Speed down", KeyCode.DownArrow, description: "Decrease the rate of time by 10%");
             speedReset = keyBindings.CreateEntry("Speed reset", KeyCode.LeftArrow, description: "Reset the rate of time");
+            matrixKey1 = keyBindings.CreateEntry("Matrix button 1", KeyCode.F1, description: "Enter Matrix™ Mode 1 while holding this key");
+            matrixKey2 = keyBindings.CreateEntry("Matrix button 2", KeyCode.F2, description: "Enter Matrix™ Mode 2 while holding this key");
 
             for (int slot = 0; slot < 10; slot++)
             {
@@ -56,6 +63,9 @@ namespace Xenon
             xenonSettings = MelonPreferences.CreateCategory("Xenon Settings");
 
             speedShow = xenonSettings.CreateEntry("Show time rate?", true);
+            matrixSpeed1 = xenonSettings.CreateEntry("Matrix speed 1", 0.5f, description: "What speed to go at when in Matrix™ Mode 1", validator: new ValueRange<float>(0.15f, 2f));
+            matrixSpeed2 = xenonSettings.CreateEntry("Matrix speed 2", 2f, description: "What speed to go at when in Matrix™ Mode 2", validator: new ValueRange<float>(0.15f, 2f));
+
 
             useBulletSize = xenonSettings.CreateEntry("Activate BulletScaler?", true);
 
