@@ -24,12 +24,6 @@ namespace Xenon.Mods
                 float halvedValue = Settings.bulletSizeModifier.Value / 2;
                 bulletTransform.localScale = new Vector3(halvedValue, halvedValue, halvedValue);
             }
-            else
-            {
-                __result._collisionRadiusDamageable = 0.05f;
-                __result.gameObject.GetComponent<SphereCollider>().radius = 0.05f;
-                bulletTransform.localScale = new Vector3(0.125f, 0.125f, 0.2f);
-            }
         }
 
         private static readonly string[] excludePaths = new string[]
