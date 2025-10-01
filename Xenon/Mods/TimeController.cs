@@ -33,19 +33,20 @@ namespace Xenon.Mods
             else if (InputManager.GetKeyDown(Settings.speedUp.Value))
             {
                 float newTime = RM.time.GetCurrentTimeScale() + scaleStep;
-                if (newTime > 2f) return;
-
-                RM.time.SetTargetTimescale(newTime);
-                currentScale = newTime;
+                if (newTime <= 2f)
+                {
+                    currentScale = newTime;
+                }
             }
             else if (InputManager.GetKeyDown(Settings.speedDown.Value))
             {
                 float newTime = RM.time.GetCurrentTimeScale() - scaleStep;
-                if (newTime <= 0.10f) return;
-
-                RM.time.SetTargetTimescale(newTime);
-                currentScale = newTime;
+                if (newTime > 0.10f)
+                {
+                    currentScale = newTime;
+                }
             }
+
             if (InputManager.GetKey(Settings.matrixKey1.Value))
             {
                 RM.time.SetTargetTimescale(Settings.matrixSpeed1.Value);
