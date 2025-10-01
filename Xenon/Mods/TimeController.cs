@@ -68,9 +68,9 @@ namespace Xenon.Mods
 
         private void OnGUI()
         {
-            if (!(RM.mechController.GetIsAlive() && currentScale != 1f && Settings.speedShow.Value)) return;
+            if (!(RM.mechController.GetIsAlive() && RM.time.GetCurrentTimeScale() != 1f && Settings.speedShow.Value)) return;
 
-            GUI.Label(new Rect(Camera.main.pixelWidth - 600, 10, 100, 50), $"{currentScale:P0}", _style);
+            GUI.Label(new Rect(Camera.main.pixelWidth - 600, 10, 100, 50), $"{RM.time.GetCurrentTimeScale():P0}", _style);
 
         }
     }
