@@ -21,15 +21,6 @@ namespace Xenon
             get; private set;
         }
 
-        private void TryFindingNeonLite()
-        {
-            NeonLite.Modules.Anticheat.Register(MelonAssembly);
-        }
-        private void TryFindingAntiCheat()
-        {
-            AntiCheat.Anticheat.TriggerAnticheat();
-            oldAntiCheat = true;
-        }
         private readonly GUIStyle AntiCheatStyle = new()
         {
             fontSize = 20,
@@ -40,16 +31,10 @@ namespace Xenon
             bool foundNeonLite = false;
             foreach (var item in RegisteredMelons)
             {
-                Debug.Log("[Xenon] " + item.Info.Name);
-                Debug.Log("[Xenon] " + item.Info.SemanticVersion);
                 if (item.Info.Name == "NeonLite" && item.Info.SemanticVersion > SemVersion.Parse("3.0.0"))
                 {
                     Debug.Log("[Xenon] Found NeonLite AntiCheat.");
-                    try
-                    {
-                        TryFindingNeonLite();
-                    }
-                    catch { }
+                    NeonLite.Modules.Anticheat.Register(MelonAssembly);
                     foundNeonLite = true;
                     break;
                 }
@@ -57,7 +42,8 @@ namespace Xenon
             if (!foundNeonLite)
             {
                 Debug.Log("[Xenon] Didn't find NeonLite AntiCheat.");
-                TryFindingAntiCheat();
+                AntiCheat.Anticheat.TriggerAnticheat();
+                oldAntiCheat = true;
             }
             PatchGame();
             Game game = Singleton<Game>.Instance;
