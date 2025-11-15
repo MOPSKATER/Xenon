@@ -7,7 +7,7 @@ namespace Xenon.Mods
     {
         private static float currentScale = 1f;
         private const float scaleStep = 0.05f;
-
+        private bool matrixActivated = false;
         private GUIStyle _style;
 
 
@@ -33,18 +33,34 @@ namespace Xenon.Mods
             else if (InputManager.GetKeyDown(Settings.speedUp.Value))
             {
                 float newTime = RM.time.GetCurrentTimeScale() + scaleStep;
-                if (newTime > 2f) return;
-
-                RM.time.SetTargetTimescale(newTime);
-                currentScale = newTime;
+                if (newTime <= 2f)
+                {
+                    currentScale = newTime;
+                }
             }
             else if (InputManager.GetKeyDown(Settings.speedDown.Value))
             {
                 float newTime = RM.time.GetCurrentTimeScale() - scaleStep;
-                if (newTime <= 0.10f) return;
+                if (newTime > 0.10f)
+                {
+                    currentScale = newTime;
+                }
+            }
 
-                RM.time.SetTargetTimescale(newTime);
-                currentScale = newTime;
+            if (InputManager.GetKey(Settings.matrixKey1.Value))
+            {
+                RM.time.SetTargetTimescale(Settings.matrixSpeed1.Value);
+                matrixActivated = true;
+            }
+            else if (InputManager.GetKey(Settings.matrixKey2.Value))
+            {
+                RM.time.SetTargetTimescale(Settings.matrixSpeed2.Value);
+                matrixActivated = true;
+            }
+            else if(matrixActivated)//if no keys and MatrixMode was on last frame
+            {
+                RM.time.SetTargetTimescale(currentScale);
+                matrixActivated = false;
             }
         }
 
@@ -56,9 +72,9 @@ namespace Xenon.Mods
 
         private void OnGUI()
         {
-            if(!(RM.mechController.GetIsAlive() && currentScale != 1f && Settings.speedShow.Value)) return;
+            if (!(RM.mechController.GetIsAlive() && RM.time.GetCurrentTimeScale() != 1f && Settings.speedShow.Value)) return;
 
-            GUI.Label(new Rect(Camera.main.pixelWidth - 600, 10, 100, 50), $"{currentScale:P0}", _style);
+            GUI.Label(new Rect(Camera.main.pixelWidth - 600, 10, 100, 50), $"{RM.time.GetCurrentTimeScale():P0}", _style);
 
         }
     }
