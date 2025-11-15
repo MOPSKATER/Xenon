@@ -7,7 +7,7 @@ namespace Xenon.Mods
     {
         private static float currentScale = 1f;
         private const float scaleStep = 0.05f;
-
+        private bool matrixActivated = false;
         private GUIStyle _style;
 
 
@@ -50,14 +50,17 @@ namespace Xenon.Mods
             if (InputManager.GetKey(Settings.matrixKey1.Value))
             {
                 RM.time.SetTargetTimescale(Settings.matrixSpeed1.Value);
+                matrixActivated = true;
             }
             else if (InputManager.GetKey(Settings.matrixKey2.Value))
             {
                 RM.time.SetTargetTimescale(Settings.matrixSpeed2.Value);
+                matrixActivated = true;
             }
-            else
+            else if(matrixActivated)//if no keys and MatrixMode was on last frame
             {
-                RM.time.SetTargetTimescale(currentScale);//return to the set speed in case matrix mode was on last frame
+                RM.time.SetTargetTimescale(currentScale);
+                matrixActivated = false;
             }
         }
 
